@@ -31,7 +31,7 @@ h4 {
     font-weight: bold;
     text-align: center;
     padding-bottom: 2rem;
-
+    color: #333;
 }
 
 .candies {
@@ -41,11 +41,11 @@ h4 {
 }
 
 .candies article {
-    color: black;
+    color: #333;
     background-color: #fff;
     box-shadow: 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
     background-color: rgb(253, 245, 235);
-
+    position: relative; /* For positioning edit and delete icons */
 }
 
 article img{
@@ -75,16 +75,100 @@ article p{
     padding: 0.5rem;
 }
 
-article button {
-    background-color: #FF6347;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 1rem;
-    color: #fff;
+article .edit-delete {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: none;
+    gap: 0.5rem;
 }
 
+article:hover .edit-delete {
+    display: flex;
+}
+
+.edit-delete i {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.edit-delete i:hover {
+    color: #FF6347;
+    font-size: 2.2rem;
+    transition-duration: 0.2s;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 1.5rem;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.modal-content h2 {
+    padding-bottom: 1.5rem;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-content form label {
+    font-weight: bold;
+}
+
+.modal-content form input,
+.modal-content form textarea {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.modal-content form button {
+    background-color: #FF6347;
+    color: #fff;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content form button:hover {
+    background-color: #ff4b3a;
+}
 
 footer {
     display: grid;

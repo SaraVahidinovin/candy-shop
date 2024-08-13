@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Candy Shop</title>
 </head>
 
@@ -18,6 +19,22 @@
       <!-- Candy articles will be dynamically inserted here -->
     </section>
   </main>
+  <!-- Modal for editing candy details -->
+  <section id="editModal" class="modal">
+    <section class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Candy Details</h2>
+      <form id="editForm">
+        <label for="candyName">Name:</label>
+        <input type="text" id="candyName" name="candyName" required>
+        <label for="candyPrice">Price:</label>
+        <input type="number" id="candyPrice" name="candyPrice" required>
+        <label for="candyDescription">Description:</label>
+        <textarea id="candyDescription" name="candyDescription" required></textarea>
+        <button type="submit">Save Changes</button>
+      </form>
+    </section>
+  </section>
   <footer>
     <section class="contact-info">
       <h2>Contact Us</h2>

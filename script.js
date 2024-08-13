@@ -63,12 +63,17 @@ function displayCandies(candies) {
         editDeleteDiv.className = "edit-delete";
 
         const editBtn = document.createElement("i");
-        editBtn.className = "edit-btn";
-        editBtn.innerHTML = "&#9998;";
+        editBtn.className = "edit-btn fa fa-edit";
+        editBtn.title = "Edit";
+
+        // Set up the edit functionality
+        editBtn.addEventListener('click', () => {
+            openEditModal(candy);
+        });
 
         const deleteBtn = document.createElement("i");
-        deleteBtn.className = "delete-btn";
-        deleteBtn.innerHTML = "&#128465;";
+        deleteBtn.className = "delete-btn fa fa-trash-o";
+        deleteBtn.title ="Delete";
 
         editDeleteDiv.appendChild(editBtn);
         editDeleteDiv.appendChild(deleteBtn);
@@ -93,4 +98,16 @@ function getDescriptionUntilPeriod(description) {
     }
     // If no period is found, return the entire description
     return description;
+}
+
+function openEditModal(candy) {
+    const modal = document.getElementById('editModal');
+    modal.style.display = 'block';
+
+    // Fill in the current candy data
+    document.getElementById('candyName').value = candy.name;
+    document.getElementById('candyPrice').value = candy.price;
+    document.getElementById('candyDescription').value = candy.description;
+
+    // Update candy in local storage on form submit
 }

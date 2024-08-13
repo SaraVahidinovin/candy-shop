@@ -43,28 +43,36 @@ h4 {
 .candies article {
     color: black;
     background-color: #fff;
-    box-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
+    background-color: rgb(253, 245, 235);
 
 }
 
 article img{
     width: 100%;
-    height: 20rem;
+    height: 12rem;
+    padding: 0.5rem;
 }
 
 article h2{
     font-family: 'Segoe UI', Roboto;
     margin: 1rem 0;
+    font-size: 1rem;
 }
 article .namePrice {
     display: flex;
     justify-content: space-between;
+    padding: 0.5rem;
+}
+article .namePrice p {
+    font-size: 1rem;
 }
 
 article p{
     font-family: sans-serif;
     font-size: 0.9rem;
     margin-bottom: 2rem;
+    padding: 0.5rem;
 }
 
 article button {

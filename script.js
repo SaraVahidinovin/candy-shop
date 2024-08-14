@@ -75,6 +75,11 @@ function displayCandies(candies) {
         deleteBtn.className = "delete-btn fa fa-trash-o";
         deleteBtn.title ="Delete";
 
+        // Set up the delete functionality
+        deleteBtn.addEventListener('click', () => {
+            confirmDelete(candy.id);
+        });
+
         editDeleteDiv.appendChild(editBtn);
         editDeleteDiv.appendChild(deleteBtn);
 
@@ -113,9 +118,9 @@ function openEditModal(candy) {
     document.getElementById('editForm').addEventListener('submit', () => {
         saveCandyChanges(candy.id);
     })
-    
+
     // Close modal when clicking on close button
-    document.getElementById(closeButton).addEventListener('click', () => {
+    document.getElementById('closeButton').addEventListener('click', () => {
         closeModal();
     })
 }
@@ -125,15 +130,15 @@ function saveCandyChanges(candyId) {
     const updatedDescription = document.getElementById('candyDescription').value;
 
     const candies = JSON.parse(localStorage.getItem('candies'));
-    const candyIndex = candies.findIndex(candy => candy.id === candyId)
+    const candyIndex = candies.findIndex(candy => candy.id === candyId);
 
     if (candyIndex !== -1) {
         candies[candyIndex].price = updatedPrice;
         candies[candyIndex].description = updatedDescription;
 
-        // TO Update local storage
-        localStorage.setItem(candies, JSON.stringify(candies));
-        
+        // To update local storage
+        localStorage.setItem('candies', JSON.stringify(candies));
+
         // To refresh the candy display
         displayCandies(candies);
 
@@ -142,6 +147,25 @@ function saveCandyChanges(candyId) {
 }
 
 function closeModal() {
-    const modal = document.getElementById('editmodal');
+    const modal = document.getElementById('editModal');
     modal.style.display = 'none';
+}
+
+// To confirm candy deletion
+function confirmDelete(candyId) {
+    if (confirm(`Are you sure you want to delete this item?`)) {
+        deleteCandy(candyId);
+    }
+}
+
+// To delete candy from local storage and refresh the list
+function deleteCandy(candyId) {
+    let candies = JSON.parse(localStorage.getItem('candies'));
+    candies = candies.filter(candy => candy.id !== candyId)
+
+    // To update local storage
+    localStorage.setItem('candies', JSON.stringify(candies));
+
+    // To refresh the candy display
+    displayCandies(candies);
 }

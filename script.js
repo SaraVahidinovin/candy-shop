@@ -110,4 +110,38 @@ function openEditModal(candy) {
     document.getElementById('candyDescription').value = candy.description;
 
     // Update candy in local storage on form submit
+    document.getElementById('editForm').addEventListener('submit', () => {
+        saveCandyChanges(candy.id);
+    })
+    
+    // Close modal when clicking on close button
+    document.getElementById(closeButton).addEventListener('click', () => {
+        closeModal();
+    })
+}
+
+function saveCandyChanges(candyId) {
+    const updatedPrice = document.getElementById('candyPrice').value;
+    const updatedDescription = document.getElementById('candyDescription').value;
+
+    const candies = JSON.parse(localStorage.getItem('candies'));
+    const candyIndex = candies.findIndex(candy => candy.id === candyId)
+
+    if (candyIndex !== -1) {
+        candies[candyIndex].price = updatedPrice;
+        candies[candyIndex].description = updatedDescription;
+
+        // TO Update local storage
+        localStorage.setItem(candies, JSON.stringify(candies));
+        
+        // To refresh the candy display
+        displayCandies(candies);
+
+        closeModal();
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('editmodal');
+    modal.style.display = 'none';
 }

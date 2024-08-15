@@ -1,4 +1,17 @@
-//window.onload = getCandies();
+
+document.addEventListener('DOMContentLoaded', () => {
+    getCandies();
+
+    const exportButton = document.getElementById('exportData');
+    exportButton.addEventListener('click', () => {
+        exportData();
+    });
+
+    const importButton = document.getElementById('importData');
+    const importFileInput = document.getElementById('importFileInput');
+    importButton.addEventListener('click', () => importFileInput.click());
+    importFileInput.addEventListener('change', importData);
+});
 
 // To fetch data from candyshop API and store it in local storage
 async function getCandies() {
@@ -170,19 +183,9 @@ function deleteCandy(candyId) {
     displayCandies(candies);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    getCandies();
-    
-    const exportButton = document.getElementById('exportData');
-    exportButton.addEventListener('click', () => {
-        exportData();
-    });
-});
-
 //To export the candies data from local storage
 function exportData() {
     const data = localStorage.getItem('candies');
-    console.log(2);
 
     // To check for the presence of the candies data in localStorage
     if (!data || JSON.parse(data).length === 0) {
@@ -204,4 +207,29 @@ function exportData() {
 
     //To release the memory associated with the url
     URL.revokeObjectURL(url);
+}
+
+function importData(event) {
+    // To store the reference to the selected file
+    const file = event.target.files[0];
+
+    // To read the file data
+    const fileReader = new FileReader();
+
+    // 
+    fileReader.onload = function () {
+        try {
+            // To convert the file's content (which is in JSON format) into a object
+            const parsedData = JSON.parse(fileReader.result);
+            localStorage.setItem('candies', JSON.stringify(parsedData));
+            alert('Data imported successfully');
+            displayCandies(parsedData);
+        } catch (error) {
+            alert("Failed to import data. Please make sure the file is a valid JSON.");
+            console.log(error);
+        }
+    };
+
+    //To start reading the file content so that it can be processed and imported.
+    fileReader.readAsText(file);
 }

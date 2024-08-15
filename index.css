@@ -1,0 +1,97 @@
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.form-container{
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 1.5rem;
+}
+
+h2 {
+    color: #ffffff;
+    color: #333;
+    text-align: center;
+    margin-top: 0;
+    font-size: 1.7rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    color: #004c98;
+    box-sizing: border-box;
+}
+
+.field-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.field-container input {
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 0.3rem;
+    border: 1px solid #ccc;
+    transition: border-color 0.2s, box-shadow 0.2s ;
+}
+
+.field-container label {
+    position: absolute;
+    color: #aaa;
+    top: 0.8rem;
+    left: 1rem;
+    transition: 0.3s;
+    background: white;
+    padding: 0.2rem;
+
+}
+
+.field-container input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.field-container input:focus + label,
+.field-container input:not(:placeholder-shown) + label {
+    top: -0.5rem;
+    color: #007bff;
+    font-size: 14px;
+}
+
+button {
+    background-color: #6d726d;
+    color: #ffffff;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    border: 1px solid #ccc;
+    font-size: 1.2rem;
+}
+
+button:hover {
+    background-color: #424642;
+    cursor: pointer;
+}
+
+#error-msg {
+    color: red;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 0;
+}

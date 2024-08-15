@@ -216,7 +216,7 @@ function importData(event) {
     // To read the file data
     const fileReader = new FileReader();
 
-    // 
+    // Once the file has been read
     fileReader.onload = function () {
         try {
             // To convert the file's content (which is in JSON format) into a object

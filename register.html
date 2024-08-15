@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>Account Registration</title>
+</head>
+<body>
+  <section class="form-container">
+    <h2 class="form-title">Register your account</h2>
+    <form id="registration-form">
+      <div class="field-container"> 
+        <input type="text" name="name" id="name" placeholder="" required>
+        <label for="name">Name</label>
+      </div>
+      <div class="field-container"> 
+        <input type="text" name="username" id="username" placeholder="" required>
+        <label for="username">Username</label>
+      </div>
+      <div class="field-container"> 
+        <input type="email" name="Email" id="email" placeholder="" required>
+        <label for="email">Email</label>
+      </div>
+      <div class="field-container"> 
+        <input type="password" name="Password" id="password" placeholder="" required>
+        <label for="password">Password</label>
+      </div>
+      <div class="field-container"> 
+        <input type="password" name="Confirm password" id="confirm-password" placeholder="" required>
+        <label for="confirm-password">Confirm password</label>
+      </div>
+      <button type="submit">Sign up</button>
+    </form>
+    <p id="error-msg"></p>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+  </section>
+  <script src="register.js"></script>
+</body>
+</html>

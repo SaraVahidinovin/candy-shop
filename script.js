@@ -1,4 +1,4 @@
-window.onload = getCandies();
+//window.onload = getCandies();
 
 // To fetch data from candyshop API and store it in local storage
 async function getCandies() {
@@ -73,7 +73,7 @@ function displayCandies(candies) {
 
         const deleteBtn = document.createElement("i");
         deleteBtn.className = "delete-btn fa fa-trash-o";
-        deleteBtn.title ="Delete";
+        deleteBtn.title = "Delete";
 
         // Set up the delete functionality
         deleteBtn.addEventListener('click', () => {
@@ -96,7 +96,7 @@ function displayCandies(candies) {
 //To extract description up to and including the first period
 function getDescriptionUntilPeriod(description) {
     const periodIndex = description.indexOf('.');
-    
+
     // If a period is found, slice the description up to and including the period
     if (periodIndex !== -1) {
         return description.slice(0, periodIndex + 1);
@@ -168,4 +168,40 @@ function deleteCandy(candyId) {
 
     // To refresh the candy display
     displayCandies(candies);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    getCandies();
+    
+    const exportButton = document.getElementById('exportData');
+    exportButton.addEventListener('click', () => {
+        exportData();
+    });
+});
+
+//To export the candies data from local storage
+function exportData() {
+    const data = localStorage.getItem('candies');
+    console.log(2);
+
+    // To check for the presence of the candies data in localStorage
+    if (!data || JSON.parse(data).length === 0) {
+        alert('No data available to export.');
+        return;
+    }
+
+    //To convert onverts this data into a Blob object
+    const file = new Blob([data], { type: 'application/json' });
+
+    //To create a URL for it
+    const url = URL.createObjectURL(file);
+
+    //To create a downloadable file that the user can save
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'candies_data.json';
+    link.click();
+
+    //To release the memory associated with the url
+    URL.revokeObjectURL(url);
 }

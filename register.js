@@ -17,6 +17,13 @@ form.addEventListener('submit', (event) => {
         return;
     }
 
+    // Email domain restriction
+    const organizationDomain = "@gmail.com"; 
+    if (!email.endsWith(organizationDomain)) {
+        displaySignUpErrorMessage('You must use your organization email address');
+        return;
+    }
+
     if (password.length < 8) {
         displayLoginErrorMessage('Password must be at least 8 characters long.');
         return;
@@ -53,7 +60,7 @@ function registerUser(name, username, email, password) {
     window.location.href = 'login.html'; // Redirect to login page
 }
 
-function displayLoginErrorMessage(message) {
+function displaySignUpErrorMessage(message) {
     errorMessage.innerText = message;
 }
 

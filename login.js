@@ -30,7 +30,7 @@ function loginUser(username, password) {
     // Successful login
     alert('Login successful!');
 
-    window.location.href = 'home.html';
+    window.location.href = 'index.html';
 }
 
 function displayLoginErrorMessage(message) {

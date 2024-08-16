@@ -139,6 +139,7 @@ function openEditModal(candy) {
 }
 
 function saveCandyChanges(candyId) {
+    const updatedName = document.getElementById('candyName').value;
     const updatedPrice = document.getElementById('candyPrice').value;
     const updatedDescription = document.getElementById('candyDescription').value;
 
@@ -146,6 +147,7 @@ function saveCandyChanges(candyId) {
     const candyIndex = candies.findIndex(candy => candy.id === candyId);
 
     if (candyIndex !== -1) {
+        candies[candyIndex].name = updatedName;
         candies[candyIndex].price = updatedPrice;
         candies[candyIndex].description = updatedDescription;
 

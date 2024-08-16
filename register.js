@@ -18,19 +18,19 @@ form.addEventListener('submit', (event) => {
     }
 
     // Email domain restriction
-    const organizationDomain = "@gmail.com"; 
+    const organizationDomain = "@gmail.com";
     if (!email.endsWith(organizationDomain)) {
         displaySignUpErrorMessage('You must use your organization email address');
         return;
     }
 
     if (password.length < 8) {
-        displayLoginErrorMessage('Password must be at least 8 characters long.');
+        displaySignUpErrorMessage('Password must be at least 8 characters long.');
         return;
     }
 
     if (password !== confirmPassword) {
-        displayLoginErrorMessage('Passwords do not match.');
+        displaySignUpErrorMessage('Passwords do not match.');
         return;
     }
 
@@ -39,8 +39,17 @@ form.addEventListener('submit', (event) => {
 
 function registerUser(name, username, email, password) {
     // Check if username or email already exists
-    if (localStorage.getItem(username)) {
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(user => user.username === username);
+    const emailAddress = users.find(user => user.email === email);
+
+    if (user) {
         displaySignUpErrorMessage('Username already exists.');
+        return;
+    }
+
+    if (emailAddress) {
+        displaySignUpErrorMessage('Email already exists.');
         return;
     }
 
@@ -51,7 +60,6 @@ function registerUser(name, username, email, password) {
         password: hashPassword(password)
     };
 
-    let users = JSON.parse(localStorage.getItem('users')) || [];
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 

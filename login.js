@@ -8,6 +8,11 @@ form.addEventListener('submit', (event) => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    if (!username || !password) {
+        errorMessage.textContent = 'All fields are required.';
+        return;
+    }
+
     loginUser(username, password);
 });
 
@@ -29,6 +34,9 @@ function loginUser(username, password) {
 
     // Successful login
     alert('Login successful!');
+    
+    // Store the logged-in user's information in local storage
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
 
     window.location.href = 'index.html';
 }

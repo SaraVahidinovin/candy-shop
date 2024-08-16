@@ -1,5 +1,23 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
+    // Check if a user is currently logged in by retrieving the 'loggedInUser' from local storage
+    if (loggedInUser) {
+        // If a user is logged in, display the admin panel 
+        document.getElementById('admin-panel').style.display = 'block';
+
+        // Show the logged-in user's username
+        document.getElementById('username').innerText = `${loggedInUser.username}!`;
+    } else {
+        // If no user is logged in, hide the admin panel
+        document.getElementById('admin-panel').style.display = 'none';
+        // Hide the logout button
+        document.getElementById('logoutBtn').style.display = 'none';
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', logoutUser);
+
     getCandies();
 
     const exportButton = document.getElementById('exportData');
@@ -37,6 +55,9 @@ function displayCandies(candies) {
     const candiesSection = document.querySelector(".candies");
     candiesSection.innerHTML = " "; // Clear previous results
 
+    // Check if a user is logged in
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+
     candies.forEach((candy) => {
         const candyArticle = document.createElement("article");
         candyArticle.className = "candy-article";
@@ -72,34 +93,36 @@ function displayCandies(candies) {
         const candyDesc = document.createElement("p");
         candyDesc.innerText = getDescriptionUntilPeriod(candy.description);
 
-        const editDeleteDiv = document.createElement("div");
-        editDeleteDiv.className = "edit-delete";
-
-        const editBtn = document.createElement("i");
-        editBtn.className = "edit-btn fa fa-edit";
-        editBtn.title = "Edit";
-
-        // Set up the edit functionality
-        editBtn.addEventListener('click', () => {
-            openEditModal(candy);
-        });
-
-        const deleteBtn = document.createElement("i");
-        deleteBtn.className = "delete-btn fa fa-trash-o";
-        deleteBtn.title = "Delete";
-
-        // Set up the delete functionality
-        deleteBtn.addEventListener('click', () => {
-            confirmDelete(candy.id);
-        });
-
-        editDeleteDiv.appendChild(editBtn);
-        editDeleteDiv.appendChild(deleteBtn);
-
         candyArticle.appendChild(candyImg);
         candyArticle.appendChild(candyNamePriceDiv);
         candyArticle.appendChild(candyDesc);
-        candyArticle.appendChild(editDeleteDiv);
+
+        if (loggedInUser) {
+            const editDeleteDiv = document.createElement("div");
+            editDeleteDiv.className = "edit-delete";
+
+            const editBtn = document.createElement("i");
+            editBtn.className = "edit-btn fa fa-edit";
+            editBtn.title = "Edit";
+
+            // Set up the edit functionality
+            editBtn.addEventListener('click', () => {
+                openEditModal(candy);
+            });
+
+            const deleteBtn = document.createElement("i");
+            deleteBtn.className = "delete-btn fa fa-trash-o";
+            deleteBtn.title = "Delete";
+
+            // Set up the delete functionality
+            deleteBtn.addEventListener('click', () => {
+                confirmDelete(candy.id);
+            });
+
+            editDeleteDiv.appendChild(editBtn);
+            editDeleteDiv.appendChild(deleteBtn);
+            candyArticle.appendChild(editDeleteDiv);
+        }
 
         candiesSection.appendChild(candyArticle);
     });
@@ -234,4 +257,13 @@ function importData(event) {
 
     //To start reading the file content so that it can be processed and imported.
     fileReader.readAsText(file);
+}
+
+
+function logoutUser() {
+    // Remove the logged-in user from local storage
+    localStorage.removeItem('loggedInUser');
+
+    // Redirect the user to the login page
+    window.location.href = 'login.html';
 }

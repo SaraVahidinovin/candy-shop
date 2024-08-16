@@ -32,9 +32,6 @@ function loginUser(username, password) {
         return;
     }
 
-    // Successful login
-    alert('Login successful!');
-    
     // Store the logged-in user's information in local storage
     localStorage.setItem('loggedInUser', JSON.stringify(user));
 

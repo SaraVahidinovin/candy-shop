@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('logoutBtn').addEventListener('click', logoutUser);
 
+    // Add event listener to the search button
+    document.getElementById('searchButton').addEventListener('click', filterCandies);
+
     getCandies();
 
     const exportButton = document.getElementById('exportData');
@@ -266,4 +269,28 @@ function logoutUser() {
 
     // Redirect the user to the login page
     window.location.href = 'login.html';
+}
+
+
+// To filter candies based on search input
+function filterCandies() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const candies = JSON.parse(localStorage.getItem('candies'));
+    const filteredCandies = candies.filter(candy => candy.name.toLowerCase().includes(searchTerm));
+
+    if (filteredCandies.length > 0) {
+        displayCandies(filteredCandies);
+    } else {
+        displayErrorMessage("No candies match your search.");
+    }
+}
+
+function displayErrorMessage(message) {
+    const candiesSection = document.querySelector(".candies");
+    candiesSection.innerHTML = " "; // Clear previous results
+
+    const errorMsg = document.createElement('p');
+    errorMsg.classList = 'error-message'
+    errorMsg.innerText = message;
+    candiesSection.appendChild(errorMsg);
 }
